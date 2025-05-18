@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "react-clock/dist/Clock.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -19,11 +19,26 @@ const UpdateSchedule = () => {
   const data = useLoaderData();
   console.log(data);
 
+  // 1.6 as all the input and DatePicker field will be updated so we use useState for every field data changed
+  const [title, setTitle] = useState(data?.title);
+  console.log(title);
+
+  const [date, setDate] = useState(data?.date);
+  console.log(date);
+
+  const [day, setDay] = useState(data?.day);
+  console.log(day);
+
+  const [hour, setHour] = useState(data?.hour);
+  console.log(hour);
+
+  const handleUpdateSchedule = () => {};
+
   return (
     <div>
       <div className="bg-[#F4F3F0] lg:p-24">
         <h2 className="text-3xl text-center font-bold">Update Gym Schedule</h2>
-        <form /* onSubmit={handleUpdateSchedule} */>
+        <form onSubmit={handleUpdateSchedule}>
           <div className="flex gap-6 ">
             <div className="form-control md:w-1/2">
               <label className="label">
@@ -33,14 +48,24 @@ const UpdateSchedule = () => {
                 type="text"
                 name="Title"
                 className="input input-bordered"
+                // 1.7.1 use value
+                value={title}
+                // 1.7.2 use onChange
+                onChange={(e) => setTitle(e.target.value)}
                 required
               />
             </div>
             <div className="form-control lg:w-1/2 mt-6 md:mt-0">
               <label className="label font-bold">
-                <span className="label-text">Day</span>
+                <span className="label-text">Date</span>
               </label>
-              <DatePicker className="input input-bordered w-full" />
+              <DatePicker
+                className="input input-bordered w-full"
+                // 1.7.3 as it's a DatePicker so we cannot use e.target instead we directly apply state here and change the date format to our desired format.
+                value={date}
+                // 1.7.4
+                onChange={(date) => setDate(date.toLocaleDateString("en-CA"))}
+              />
             </div>
           </div>
           <div className="flex gap-6 ">
@@ -49,7 +74,15 @@ const UpdateSchedule = () => {
                 <span className="label-text font-bold">Day</span>
               </label>
 
-              <select className="input input-bordered " name="day" id="day">
+              <select
+                className="input input-bordered "
+                name="day"
+                id="day"
+                // 1.7.5
+                value={day}
+                // 1.7.6 as day is not a third party package
+                onChange={(e) => setDay(e.target.value)}
+              >
                 <option value="sunday">Sunday</option>
                 <option value="monday">Monday</option>
                 <option value="tuesday">Tuesday</option>
@@ -72,6 +105,10 @@ const UpdateSchedule = () => {
                 timeIntervals={15}
                 timeCaption="Time"
                 dateFormat="h:mm aa"
+                // 1.7.7
+                value={hour}
+                // 1.7.8 it's a third party package
+                onChange={(date) => setHour(date)}
               />
             </div>
           </div>
