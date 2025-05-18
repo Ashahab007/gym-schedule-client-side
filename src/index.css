@@ -2,5 +2,9 @@
 @plugin "daisyui";
 
 nav a.active {
-  text-decoration: underline;
+  /* text-decoration: underline; */
+  border: 1px dashed pink;
+  background-color: pink;
+  border-radius: 5px;
+  color: aliceblue;
 }
