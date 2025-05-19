@@ -7,11 +7,11 @@ const Schedule = ({ schedule, index, handleDelete }) => {
   console.log(schedule);
 
   const { _id, title, hour, day, date } = schedule;
-  // 2.0 my requirement is make completed button with double tick function upon click
+  // 2.0 my requirement is make completed button with double tick function upon click. (Note: But problem is in ui it works after reload.)
 
   // const [isCompleted, setIsCompleted] = useState(schedule);
 
-  // 2.6 create the handleCompleted function and send the data to db using patch method
+  // 2.6 create the handleCompleted function and send the data to db using patch method. But problem is in ui it works after reload.
   const handleComplete = (id) => {
     fetch(`http://localhost:3000/schedule/${id}`, {
       method: "PATCH",

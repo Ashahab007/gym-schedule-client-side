@@ -3,18 +3,25 @@ import Schedule from "./Schedule";
 
 const AllSchedule = () => {
   const [schedules, setSchedules] = useState([]);
+  // 3.2 define state
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:3000/schedule")
+    // get api
+    // this was my get api fetch but commented due to we use this get api with search. Which will dynamically set using query string on 3.4
+    // fetch("http://localhost:3000/schedule")
+    // 3.4 call the api for dynamically for get and search
+    fetch(`http://localhost:3000/schedule?searchParams=${search}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
         setSchedules(data);
       });
-  }, []);
+  }, [search]); // 3.5 here search is apply for dependency due to in every type in search, the useEffect will be called.
 
   const handleDelete = (_id) => {
     console.log(_id);
+
     fetch(`http://localhost:3000/schedule/${_id}`, {
       method: "DELETE",
       headers: {
@@ -33,13 +40,15 @@ const AllSchedule = () => {
         }
       });
   };
+  console.log(search);
 
   return (
     <div>
       <h1 className="text-center">All Schedule: {schedules.length}</h1>
       <div className="w-[400px] mx-auto mb-4">
         <input
-          // onChange={(e) => setSearch(e.target.value)}
+          // 3.3 get the data from the input field
+          onChange={(e) => setSearch(e.target.value)}
           type="text"
           name="search"
           placeholder="search"
