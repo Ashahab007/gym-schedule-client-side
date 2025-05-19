@@ -21,25 +21,3 @@ const Home = () => {
 };
 
 export default Home;
-
-{
-  /* <div
-      className="relative h-screen bg-cover bg-center flex items-center justify-center"
-      style={{
-        backgroundImage: "url('https://i.ibb.co/RG394Zv/banner-Image.jpg')",
-      }}
-    >
-   
-      <div className="absolute inset-0 bg-blue-900 bg-opacity-60"></div>
-
-    
-      <div className="relative z-10 text-center text-white px-4">
-        <h1 className="text-5xl font-extrabold text-pink-500 drop-shadow-md">
-          Power Up Your Fitness
-        </h1>
-        <p className="mt-4 text-xl text-blue-200 drop-shadow-sm">
-          Achieve your goals with strength, discipline, and dedication.
-        </p>
-      </div>
-    </div>  */
-}

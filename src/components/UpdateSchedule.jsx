@@ -32,7 +32,30 @@ const UpdateSchedule = () => {
   const [hour, setHour] = useState(data?.hour);
   console.log(hour);
 
-  const handleUpdateSchedule = () => {};
+  // 1.7.9 create handleUpdateSchedule to get the data in an object
+  const handleUpdateSchedule = (e) => {
+    e.preventDefault();
+    // create an object as per 1.2 updateDoc and send to db
+    const updatedData = {
+      title: title,
+      day: day,
+      hour: hour,
+      date: date,
+    };
+    console.log(updatedData);
+    // 1.7.10 send the data to the specific id
+    fetch(`http://localhost:3000/schedule/${data?._id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(updatedData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  };
 
   return (
     <div>
@@ -99,7 +122,8 @@ const UpdateSchedule = () => {
 
               <DatePicker
                 className="input input-bordered w-full"
-                readOnly
+                // readOnly
+                // selected={date}
                 showTimeSelect
                 showTimeSelectOnly
                 timeIntervals={15}
@@ -108,7 +132,7 @@ const UpdateSchedule = () => {
                 // 1.7.7
                 value={hour}
                 // 1.7.8 it's a third party package
-                onChange={(date) => setHour(date)}
+                onChange={(date) => setHour(formatTime12Hour(date))}
               />
             </div>
           </div>
