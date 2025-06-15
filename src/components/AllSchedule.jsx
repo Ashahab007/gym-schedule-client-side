@@ -9,6 +9,7 @@ const AllSchedule = () => {
   useEffect(() => {
     // get api
     // this was my get api fetch but commented due to we use this get api with search. Which will dynamically set using query string on 3.4
+
     // fetch("http://localhost:3000/schedule")
     // 3.4 call the api for dynamically for get and search
     fetch(`http://localhost:3000/schedule?searchParams=${search}`)
